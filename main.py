@@ -11,14 +11,14 @@ app = FastAPI()
 
 # Load dataset from CSV into a DataFrame and then into a dictionary
 df = pd.read_csv(dataset)
-students_data = pd.Series(df.Department.values, index=df['studentid']).to_dict()
+students_data = pd.Series(df.Department.values, index=df['Student ID']).to_dict()
 
 @app.get("/department/{student_id}")
-def get_department(studentid: int):
-    department = students_data.get(studentid)
+def get_department(student_id: int):
+    department = students_data.get(student_id)
     if department is None:
-        raise HTTPException(status_code=404, detail="studentid not found")
-    return {"studentid": studentid, "Department": department}
+        raise HTTPException(status_code=404, detail="Student ID not found")
+    return {"studentId": student_id, "Department": department}
 
 
 
